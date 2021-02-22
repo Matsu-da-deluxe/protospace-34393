@@ -48,13 +48,13 @@ class PrototypesController < ApplicationController
     redirect_to root_path
   end
 
+  private
   def move_to_index
-    unless current_user == @prototype.user
+    unless user_signed_in?
       redirect_to action: :index
     end
   end
 
-  private
   def prototype_params
     params.require(:prototype).permit(:image, :catch_copy, :concept, :tittle).merge(user_id: current_user.id)
   end
